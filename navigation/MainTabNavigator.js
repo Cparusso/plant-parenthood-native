@@ -5,6 +5,7 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import Plants from '../screens/Plants';
+import NewPage from '../screens/NewPage';
 import SettingsScreen from '../screens/SettingsScreen';
 
 const config = Platform.select({
@@ -35,21 +36,37 @@ HomeStack.navigationOptions = {
 
 HomeStack.path = '';
 
-const LinksStack = createStackNavigator(
+const NewStack = createStackNavigator(
   {
-    Links: Plants,
+    New: NewPage,
   },
   config
 );
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+NewStack.navigationOptions = {
+  tabBarLabel: 'NewStack',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
   ),
 };
 
-LinksStack.path = '';
+NewPage.path = '';
+
+const PlantsStack = createStackNavigator(
+  {
+    Plants: Plants,
+  },
+  config
+);
+
+PlantsStack.navigationOptions = {
+  tabBarLabel: 'Plants',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
+  ),
+};
+
+PlantsStack.path = '';
 
 const SettingsStack = createStackNavigator(
   {
@@ -69,8 +86,9 @@ SettingsStack.path = '';
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
-  LinksStack,
+  PlantsStack,
   SettingsStack,
+  NewStack
 });
 
 tabNavigator.path = '';

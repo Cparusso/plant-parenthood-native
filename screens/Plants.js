@@ -3,15 +3,15 @@ import { ScrollView, StyleSheet, Text } from 'react-native';
 import { ExpoLinksView } from '@expo/samples';
 import PlantCard from './PlantCard';
 
+import styled from 'styled-components';
+
 export default function Plants() {
   const [plants, setPlants] = useState([])
   const [hasErrors, setErrors] = useState(false)
 
   useEffect(() => {
-    console.log("UE Started")
     fetch('http://taco.local:3000/plants')
     .then(resp => {
-      console.log("wahooo?")
       return resp.json()
     })
     .then(setPlants)
@@ -26,7 +26,7 @@ export default function Plants() {
 }
 
 Plants.navigationOptions = {
-  title: 'Links',
+  title: 'Plants',
 };
 
 const styles = StyleSheet.create({
